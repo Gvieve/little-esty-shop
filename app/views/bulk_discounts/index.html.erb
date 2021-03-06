@@ -5,6 +5,15 @@
 <center> <%= render "shared/flash" %> </center>
 <h1 class="alert alert-info"><center>Bulk Discounts</center> </h1>
 
+<section class="upcoming-holidays">
+  <h3>Upcoming Holidays</h3>
+    <ul>
+      <% @holidays.next_3_public_holidays.each do |holiday| %>
+        <li><%= holiday[:name] %>: <%= holiday[:date] %></li>
+      <% end %>
+    </ul>
+</section>
+
 <section class="discounts" style="float:none">
   <% if !@merchant.bulk_discounts.empty? %>
     <table class="table table-striped table-borderless">

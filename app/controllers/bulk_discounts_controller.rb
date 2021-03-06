@@ -3,6 +3,7 @@ class BulkDiscountsController < ApplicationController
   before_action :find_discount, except: [:index]
 
   def index
+    @holidays = Holidays.new
   end
 
   def show

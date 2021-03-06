@@ -35,4 +35,22 @@ RSpec.describe 'As a merchant when I visit my bulk discounts index page' do
       end
     end
   end
+
+  describe "I see a section with a header of 'Upcoming Holidays'" do
+    it "In this section the name and date of the next 3 upcoming US holidays are listed" do
+      holidays = Holidays.new
+
+      visit merchant_bulk_discounts_path(@merchant)
+
+      within ".upcoming-holidays" do
+        expect(page).to have_content("Upcoming Holidays")
+        expect(page).to have_content("#{holidays.next_3_public_holidays[0][:name]}")
+        expect(page).to have_content("#{holidays.next_3_public_holidays[0][:date]}")
+        expect(page).to have_content("#{holidays.next_3_public_holidays[1][:name]}")
+        expect(page).to have_content("#{holidays.next_3_public_holidays[1][:date]}")
+        expect(page).to have_content("#{holidays.next_3_public_holidays[2][:name]}")
+        expect(page).to have_content("#{holidays.next_3_public_holidays[2][:date]}")
+      end
+    end
+  end
 end
