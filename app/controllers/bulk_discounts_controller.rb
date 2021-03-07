@@ -24,6 +24,18 @@ class BulkDiscountsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @discount.update(discount_params)
+      flash[:notice] = "#{@discount.name}'s successfully updated"
+      render :show
+    else
+      flash[:errors] = @discount.errors.full_messages
+      render :edit
+    end
+  end
 
   private
 
