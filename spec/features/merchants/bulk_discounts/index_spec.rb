@@ -36,6 +36,12 @@ RSpec.describe 'As a merchant when I visit my bulk discounts index page' do
     end
   end
 
+  it "and I do not see bulk discounts for another merchant" do
+    visit merchant_bulk_discounts_path(@merchant)
+
+    expect(page).to_not have_content("#discount-#{@bd3.id}")
+  end
+
   describe "I see a section with a header of 'Upcoming Holidays'" do
     it "In this section the name and date of the next 3 upcoming US holidays are listed" do
       holidays = Holidays.new
@@ -52,5 +58,13 @@ RSpec.describe 'As a merchant when I visit my bulk discounts index page' do
         expect(page).to have_content("#{holidays.next_3_public_holidays[2][:date]}")
       end
     end
+  end
+
+  it "I see a button to create a new bulk discount" do
+    visit merchant_bulk_discounts_path(@merchant)
+
+    expect(page).to have_button("Create Bulk Discount")
+    click_button "Create Bulk Discount"
+    expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts/new")
   end
 end

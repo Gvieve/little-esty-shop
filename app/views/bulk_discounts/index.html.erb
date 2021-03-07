@@ -2,8 +2,9 @@
   <h1 class="alert alert-dark" style="width:500px"><center><%= @merchant.name %></center></h1>
   <%= render partial: "/shared/merc_links", locals: {merchant: @merchant} %><br>
 </header>
-<center> <%= render "shared/flash" %> </center>
 <h1 class="alert alert-info"><center>Bulk Discounts</center> </h1>
+<%= button_to "Create Bulk Discount", new_merchant_bulk_discount_path(@merchant), method: :get, class: "btn btn-outline-light"%><br>
+<center> <%= render "shared/flash" %> </center>
 
 <section class="upcoming-holidays">
   <h3>Upcoming Holidays</h3>

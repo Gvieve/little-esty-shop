@@ -1,0 +1,10 @@
+<header>
+  <h1 class="alert alert-dark" style="width:500px"><center><%= @merchant.name %></center></h1>
+  <%= render partial: "/shared/merc_links", locals: {merchant: @merchant} %><br>
+</header>
+<h1 class="alert alert-info"><center><%= @discount.name %></center> </h1>
+<center> <%= render "shared/flash" %> </center>
+<h3>Item Threshold: <%= @discount.item_threshold %></h3>
+<h3>Discount Percent: <%= @discount.percent_discount %></h3>
+
+<%= button_to "Edit Bulk Discount", edit_merchant_bulk_discount_path(@merchant, @discount), method: :get, class: "btn btn-outline-light" %><br>

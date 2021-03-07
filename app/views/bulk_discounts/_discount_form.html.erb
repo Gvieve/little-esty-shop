@@ -1,0 +1,9 @@
+<%= form_with url: path, discount: discount, method: method, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, value: discount.name%><br><br>
+  <%= f.label :item_threshold %>
+  <%= f.number_field :item_threshold, value: discount.item_threshold %><br><br>
+  <%= f.label :discount_percent %>
+  <%= f.number_field :percent_discount, value: discount.percent_discount %><br><br>
+  <%= f.submit button_text %>
+<% end %>
