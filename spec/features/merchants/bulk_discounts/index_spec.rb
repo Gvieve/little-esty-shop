@@ -67,4 +67,20 @@ RSpec.describe 'As a merchant when I visit my bulk discounts index page' do
     click_button "Create Bulk Discount"
     expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts/new")
   end
+
+  it "next to each discount there is a button to delete that discount" do
+    visit merchant_bulk_discounts_path(@merchant)
+
+    within ".discounts" do
+      expect(page.all('.button_to', count: 3))
+
+      within "#discount-#{@bd1.id}" do
+        expect(page).to have_button("Delete")
+        click_button "Delete"
+      end
+
+      expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts")
+      expect(page).to_not have_content("#{@bd1.name}")
+    end
+  end
 end

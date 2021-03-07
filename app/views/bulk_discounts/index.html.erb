@@ -23,6 +23,7 @@
           <th scope="col"><span class="text white_glow">Discount</span></th>
           <th scope="col"><span class="text white_glow">Item Threshold</span></th>
           <th scope="col"><span class="text white_glow">Percent Discount</span></th>
+          <th scope="col"><span class="text white_glow">Delete</span></th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +33,7 @@
               <td><%= link_to "#{discount.name}", merchant_bulk_discount_path(@merchant, discount), style: "color:white"%></td>
               <td><%= discount.item_threshold %></td>
               <td><%= number_to_percentage(discount.percent_discount, precision: 0) %></td>
+              <td><%= button_to "Delete", merchant_bulk_discount_path(@merchant, discount), method: :delete, style: "color:black"%></td>
             </div>
           </tr>
         <% end %>
