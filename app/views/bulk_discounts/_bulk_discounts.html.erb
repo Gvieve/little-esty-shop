@@ -1,0 +1,32 @@
+<section class="discounts" style="float:none">
+  <% if !merchant.bulk_discounts.empty? %>
+    <table class="table table-striped table-borderless">
+      <thead style="text-align:left">
+        <tr>
+          <th scope="col"><span class="text white_glow">Discount</span></th>
+          <th scope="col"><span class="text white_glow">Item Threshold</span></th>
+          <th scope="col"><span class="text white_glow">Percent Discount</span></th>
+          <th scope="col"><span class="text white_glow">Delete</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% merchant.bulk_discounts.each do |discount| %>
+          <tr style="text-align:left">
+            <div id="discount-<%= discount.id %>">
+              <td><%= link_to "#{discount.name}", merchant_bulk_discount_path(merchant, discount), style: "color:white"%></td>
+              <td><%= discount.item_threshold %></td>
+              <td><%= number_to_percentage(discount.percent_discount, precision: 0) %></td>
+              <% if discount.pending_invoice_items? %>
+                <td>Cannot delete with pending invoice items</td>
+              <% else  %>
+                <td><%= button_to "Delete", merchant_bulk_discount_path(merchant, discount), method: :delete, style: "color:black"%></td>
+              <% end %>
+            </div>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h3>Currently no active discounts</h3>
+  <% end %>
+</section>
