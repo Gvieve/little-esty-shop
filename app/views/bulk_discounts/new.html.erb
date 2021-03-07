@@ -1,0 +1,12 @@
+<header>
+  <h1 class="alert alert-dark" style="width:500px"><center><%= @merchant.name %></center></h1>
+  <%= render partial: "/shared/merc_links", locals: {merchant: @merchant} %><br>
+</header>
+<center> <%= render partial: "flash" %> </center>
+<h3 class="alert alert-info"><center>Create a New Bulk Discount</center> </h3>
+
+<%= render partial: "discount_form",
+    locals: { path: merchant_bulk_discounts_path(@merchant),
+              method: :post,
+              discount: @discount,
+              button_text: "Create Bulk Discount"} %>

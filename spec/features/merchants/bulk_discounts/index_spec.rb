@@ -53,4 +53,12 @@ RSpec.describe 'As a merchant when I visit my bulk discounts index page' do
       end
     end
   end
+
+  it "I see a button to create a new bulk discount" do
+    visit merchant_bulk_discounts_path(@merchant)
+
+    expect(page).to have_button("Create Bulk Discount")
+    click_button "Create Bulk Discount"
+    expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts/new")
+  end
 end
