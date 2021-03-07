@@ -4,6 +4,7 @@ RSpec.describe 'As a merchant when I visit my bulk discounts index page' do
   before :each do
     @merchant = Merchant.first
     @merchant2 = Merchant.second
+    @merchant3 = Merchant.third
     @bd1 = @merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
     @bd2 = @merchant.bulk_discounts.create!(name: "Discount 2", item_threshold: 15, percent_discount: 15)
     @bd3 = @merchant2.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
@@ -19,6 +20,14 @@ RSpec.describe 'As a merchant when I visit my bulk discounts index page' do
       expect(page).to have_content("#{@bd1.name}")
       expect(page).to have_content("#{@bd1.item_threshold}")
       expect(page).to have_content("#{@bd1.percent_discount/100}%")
+    end
+  end
+
+  it "if there are no bulk discounts I see a message 'Currently no active bulk discounts'" do
+    visit merchant_bulk_discounts_path(@merchant3)
+
+    within ".discounts" do
+      expect(page).to have_content("Currently no active discounts")
     end
   end
 
@@ -68,19 +77,27 @@ RSpec.describe 'As a merchant when I visit my bulk discounts index page' do
     expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts/new")
   end
 
-  it "next to each discount there is a button to delete that discount" do
-    visit merchant_bulk_discounts_path(@merchant)
+  describe "next to discounts there is a button to delete" do
+    it "once clicked I am redirected back to index and I no longer see it" do
+      visit merchant_bulk_discounts_path(@merchant)
 
-    within ".discounts" do
-      expect(page.all('.button_to', count: 3))
+      within ".discounts" do
+        expect(page.all('.button_to', count: 3))
 
-      within "#discount-#{@bd1.id}" do
-        expect(page).to have_button("Delete")
-        click_button "Delete"
+        within "#discount-#{@bd1.id}" do
+          expect(page).to have_button("Delete")
+          click_button "Delete"
+        end
+
+        expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts")
+        expect(page).to_not have_content("#{@bd1.name}")
       end
+    end
 
-      expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts")
-      expect(page).to_not have_content("#{@bd1.name}")
+    it "I do not see a delete button next to discounts with pending invoice items" do
+      visit merchant_bulk_discounts_path(@merchant)
+
+
     end
   end
 end
