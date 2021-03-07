@@ -1,0 +1,9 @@
+id,name,item_threshold,percent_discount,merchant_id,created_at,updated_at
+1,merch 1 discount 10,10,10,1,2012-03-27 14:54:09 UTC,2012-03-27 14:54:09 UTC
+2,merch 1 discount 15,15,15,1,2012-03-27 14:54:09 UTC,2012-03-27 14:54:09 UTC
+3,merch 1 discount 20,20,20,1,2012-03-27 14:54:09 UTC,2012-03-27 14:54:09 UTC
+4,merch 3 discount 15,10,15,3,2012-03-27 14:54:09 UTC,2012-03-27 14:54:09 UTC
+5,merch 3 discount 25,50,25,3,2012-03-27 14:54:09 UTC,2012-03-27 14:54:09 UTC
+6,merch 4 discount 10,10,10,4,2012-03-27 14:54:09 UTC,2012-03-27 14:54:09 UTC
+7,merch 5 discount 10,10,10,5,2012-03-27 14:54:09 UTC,2012-03-27 14:54:09 UTC
+8,merch 6 discount 10,10,10,6,2012-03-27 14:54:09 UTC,2012-03-27 14:54:09 UTC

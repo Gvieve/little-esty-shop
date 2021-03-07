@@ -1,5 +1,6 @@
 <div class="nav justify-content-end">
-  <%= button_to "Dashboard", "/merchant/#{merchant.id}/dashboard", method: :get, class: "btn btn-outline-light" %>
-  <%= button_to "My Items", "/merchant/#{merchant.id}/items", method: :get, class: "btn btn-outline-light" %>
-  <%= button_to "My Invoices", "/merchant/#{merchant.id}/invoices", method: :get, class: "btn btn-outline-light" %>
+  <%= button_to "Dashboard", merchant_dashboard_index_path(merchant), method: :get, class: "btn btn-outline-light" %>
+  <%= button_to "My Items", merchant_items_path(merchant), method: :get, class: "btn btn-outline-light" %>
+  <%= button_to "My Invoices", merchant_invoices_path(merchant), method: :get, class: "btn btn-outline-light" %>
+  <%= button_to "My Discounts", merchant_bulk_discounts_path(merchant), method: :get, class: "btn btn-outline-light" %>
 </div>
