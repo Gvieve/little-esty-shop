@@ -51,15 +51,15 @@ RSpec.describe InvoiceItem, type: :model do
       end
     end
 
-    describe '#discount_total' do
+    describe '#discount_revenue' do
       it "calculates total discount when applicable" do
         merchant = Merchant.first
         bd1 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
         inv_item1 = InvoiceItem.create!(unit_price: 0.100e3, status: "packaged", quantity: 10, item_id: 3, invoice_id: 484)
         inv_item2 = merchant.invoice_items.where("quantity <= 10").first
 
-        expect(inv_item1.discount_total).to eq(0.1e3)
-        expect(inv_item2.discount_total).to eq(0)
+        expect(inv_item1.discount_revenue).to eq(0.1e3)
+        expect(inv_item2.discount_revenue).to eq(0)
       end
     end
 

@@ -16,7 +16,7 @@ class InvoiceItem < ApplicationRecord
     unit_price * quantity
   end
 
-  def discount_total
+  def discount_revenue
     discount_price ? revenue - (discount_price * quantity) : 0
   end
 
