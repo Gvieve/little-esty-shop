@@ -16,6 +16,10 @@ class InvoiceItem < ApplicationRecord
     unit_price * quantity
   end
 
+  def discount_total
+    discount_price ? revenue - (discount_price * quantity) : 0
+  end
+
   def self.top_sales_date
     select('invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenues')
     .joins(:transactions)

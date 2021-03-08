@@ -44,10 +44,22 @@ RSpec.describe InvoiceItem, type: :model do
 
   describe 'instance methods' do
     describe '#revenue' do
-      it "gets revenue of " do
+      it "calculates revenue of invoice item" do
         invoice_item = create(:invoice_item, unit_price: 2.5, quantity: 3)
 
         expect(invoice_item.revenue).to eq(7.5)
+      end
+    end
+
+    describe '#discount_total' do
+      it "calculates total discount when applicable" do
+        merchant = Merchant.first
+        bd1 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
+        inv_item1 = InvoiceItem.create!(unit_price: 0.100e3, status: "packaged", quantity: 10, item_id: 3, invoice_id: 484)
+        inv_item2 = merchant.invoice_items.where("quantity <= 10").first
+
+        expect(inv_item1.discount_total).to eq(0.1e3)
+        expect(inv_item2.discount_total).to eq(0)
       end
     end
 
