@@ -4,4 +4,6 @@
   <% end %>
   <p>Created on: <%= invoice.created_at.strftime('%A, %B %d, %Y') %></p>
   <p>Total Revenue: <%= number_to_currency(invoice.total_revenue, precision: 2) %></p>
+  <p>Total Discounts: <%= number_to_currency(invoice.total_discount_revenue, precision: 2) %></p>
+  <p>Grand Total: <%= number_to_currency(invoice.grand_total_revenue, precision: 2) %></p>
 </section>

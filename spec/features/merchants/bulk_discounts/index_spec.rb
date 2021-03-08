@@ -82,7 +82,7 @@ RSpec.describe 'As a merchant when I visit my bulk discounts index page' do
       visit merchant_bulk_discounts_path(@merchant)
 
       within ".discounts" do
-        expect(page.all('.button_to', count: 3))
+        expect(page.all('.button_to', count: 2))
 
         within "#discount-#{@bd1.id}" do
           expect(page).to have_button("Delete")

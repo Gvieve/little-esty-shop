@@ -39,6 +39,19 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.top_5_by_revenue.first.total_revenue.to_f).to eq(29349736.0)
       end
     end
+
+    describe '::top_5_customers_for_merchant' do
+      it "gets the top 5 customers with successful transactions for a specific merchant" do
+        merchant = Merchant.all.first
+        results = merchant.top_5_customers_by_transactions
+
+        expect(results.first.first_name).to eq("Parker")
+        expect(results.first.transaction_count).to eq(8)
+        expect(results.last.transaction_count).to eq(4)
+        expect(results.include?("Mariah")).to eq(false)
+        expect(results.pluck(:id).count).to eq(5)
+      end
+    end
   end
 
   describe 'instance methods' do
@@ -52,19 +65,6 @@ RSpec.describe Merchant, type: :model do
         create(:invoice_item, item_id: item2.id, invoice_id: invoice1.id, status: :pending)
 
         expect(merchant.distinct_invoices.pluck(:id)).to eq([invoice1.id])
-      end
-    end
-
-    describe '::top_5_customers_for_merchant' do
-      it "gets the top 5 customers with successful transactions for a specific merchant" do
-        merchant = Merchant.all.first
-        results = merchant.top_5_customers_by_transactions
-
-        expect(results.first.first_name).to eq("Parker")
-        expect(results.first.transaction_count).to eq(8)
-        expect(results.last.transaction_count).to eq(4)
-        expect(results.include?("Mariah")).to eq(false)
-        expect(results.pluck(:id).count).to eq(5)
       end
     end
   end

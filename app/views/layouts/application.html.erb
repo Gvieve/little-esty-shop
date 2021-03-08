@@ -20,4 +20,24 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
   <!-- Github stats in github_footer_file under views/shared -->
+  <footer>
+    <h3 class="white_glow"><center><%= @repo.repo_name.capitalize %> Repo Stats</center></h3>
+    <table class="table table-striped center table-borderless">
+      <thead>
+        <tr>
+          <th class="white_glow">Usernames:</th>
+          <th class="white_glow">Count:</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @repo.repo_commits.each do |name, count| %>
+        <tr>
+          <td><%= name %></td>
+          <td><%= count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+    Closed Pull Requests: <%= @repo.repo_pull_requests %>
+  </footer>
 </html>
