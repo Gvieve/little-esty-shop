@@ -21,9 +21,16 @@ RSpec.describe BulkDiscount, type: :model do
       it "returns true if there are pending invoice items for a bulk discount" do
         merchant = Merchant.first
         bd1 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
-        bd2 = merchant.bulk_discounts.create!(name: "Discount 2", item_threshold: 15, percent_discount: 15)
 
         expect(bd1.pending_invoice_items?).to eq(true)
+      end
+
+      it "returns false when a discount doesn't apply to any items, or does and has no pending invoices" do
+        merchant = Merchant.fifth
+        bd1 = merchant.bulk_discounts.create!(name: "Discount 2", item_threshold: 10, percent_discount: 10)
+        bd2 = merchant.bulk_discounts.create!(name: "Discount 2", item_threshold: 15, percent_discount: 15)
+
+        expect(bd1.pending_invoice_items?).to eq(false)
         expect(bd2.pending_invoice_items?).to eq(false)
       end
     end
