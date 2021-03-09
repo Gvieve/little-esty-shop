@@ -47,6 +47,8 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'orderly'
   gem 'factory_bot_rails'
+  gem "selenium-webdriver"
+  gem "webmock"
 end
 
 group :development do

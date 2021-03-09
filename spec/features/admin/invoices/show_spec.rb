@@ -73,10 +73,20 @@ RSpec.describe 'As an admin, when I visit the admin invoice show page' do
         end
       end
 
-      describe 'if there are any applicable discounts' do
-        it "I see the discount amount which is a link to that discount's show page" do
-          visit admin_invoice_path(@invoice)
+    describe 'if there are any applicable discounts' do
+      it "I see the discount amount and percent on each item" do
+        merchant = Merchant.first
+        bd1 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
+        invoice484 = Invoice.find(484)
+        invoice_item = InvoiceItem.where("invoice_id = 484", "quantity >= 10").first
 
+        visit admin_invoice_path(merchant, invoice484)
+
+        within ".invoice-item-#{invoice_item.id}" do
+          expect(page).to have_content(invoice_item.item.name)
+          expect(page).to have_content("$32,301.00")
+          expect(page).to have_content("$29,070.90")
+          expect(page).to have_content("10%")
         end
       end
     end

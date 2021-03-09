@@ -18,8 +18,6 @@
   </tr>
 </table>
 
-
-
 <section class="invoice-items">
   <h3 class="white_glow"><center>Items on this Invoice:</center></h3>
   <table class="table table-striped center table-borderless">
@@ -28,6 +26,8 @@
         <th scope="col" class="white_glow">Item Name:</th>
         <th scope="col" class="white_glow">Quantity:</th>
         <th scope="col" class="white_glow">Unit Price:</th>
+        <th scope="col" class="white_glow">Discounted Price:</th>
+        <th scope="col" class="white_glow">Discount Amount:</th>
         <th scope="col" class="white_glow">Status:</th>
       </tr>
     </thead>
@@ -38,6 +38,8 @@
           <td><%= invoice_item.item.name %></td>
           <td><%= invoice_item.quantity %></td>
           <td><%= number_to_currency(invoice_item.unit_price, precision: 2) %></td>
+          <td><%= number_to_currency(invoice_item.discount_price, precision: 2) %></td>
+          <td><%= number_to_percentage(invoice_item.discount_percent, precision: 0) %></td>
           <td><%= invoice_item.status.titleize %></td>
         </tr>
       </tbody>
