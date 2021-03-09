@@ -72,6 +72,7 @@ RSpec.describe 'As an admin, when I visit the admin invoice show page' do
           expect(page).to have_content(@invoice_item.status.titleize)
         end
       end
+    end
 
     describe 'if there are any applicable discounts' do
       it "I see the discount amount and percent on each item" do
@@ -79,8 +80,9 @@ RSpec.describe 'As an admin, when I visit the admin invoice show page' do
         bd1 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
         invoice484 = Invoice.find(484)
         invoice_item = InvoiceItem.where("invoice_id = 484", "quantity >= 10").first
+        invoice_item.update!(status: :pending)
 
-        visit admin_invoice_path(merchant, invoice484)
+        visit admin_invoice_path(invoice484)
 
         within ".invoice-item-#{invoice_item.id}" do
           expect(page).to have_content(invoice_item.item.name)

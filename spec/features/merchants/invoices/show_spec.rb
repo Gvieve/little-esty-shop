@@ -79,6 +79,7 @@ RSpec.describe "As a merchant, when I visit my merchant's invoice show page(/mer
       bd1 = @merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
       invoice484 = Invoice.find(484)
       invoice_item = InvoiceItem.where("invoice_id = 484", "quantity >= 10").first
+      invoice_item.update!(status: :pending)
 
       visit merchant_invoice_path(@merchant, invoice484)
 
