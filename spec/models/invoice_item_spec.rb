@@ -76,21 +76,8 @@ RSpec.describe InvoiceItem, type: :model do
       end
     end
 
-    describe '#discount_percentage' do
-      it "it returns the discount_percent when there is a best discount, or nil" do
-        merchant = Merchant.first
-        bd1 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
-        bd2 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 20)
-        inv_item1 = merchant.invoice_items.where("quantity >= 10").first
-        inv_item2 = merchant.invoice_items.where("quantity <= 10").first
-
-        expect(inv_item1.discount_percentage).to eq(20)
-        expect(inv_item2.discount_percentage).to be_nil
-      end
-    end
-
     describe '#apply_discount' do
-      it "when invoice_item is created or updated and has best discount, discount_id and discount_price are saved" do
+      it "when invoice_item is created or updated and has best discount, discount_id, percent, and price are saved" do
         merchant = Merchant.first
         bd1 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
         bd2 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 15, percent_discount: 15)
@@ -104,6 +91,7 @@ RSpec.describe InvoiceItem, type: :model do
 
         expect(inv_item2.discount_id).to eq(bd2.id)
         expect(inv_item2.discount_price).to eq(0.6384095e5)
+        expect(inv_item2.discount_percent).to eq(15)
       end
 
       it "when invoice_item has discount and quantity is updated to below item_threshold discount is removed" do
