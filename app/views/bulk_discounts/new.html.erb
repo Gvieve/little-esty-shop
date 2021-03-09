@@ -6,7 +6,6 @@
 <h3 class="alert alert-info"><center>Create a New Bulk Discount</center> </h3>
 
 <%= render partial: "discount_form",
-    locals: { path: merchant_bulk_discounts_path(@merchant),
-              method: :post,
-              discount: @discount,
-              button_text: "Create Bulk Discount"} %>
+    locals: { merchant: @merchant,
+              bulk_discount: @discount,
+              method: :post} %>
