@@ -48,7 +48,11 @@ group :development, :test do
   gem 'orderly'
   gem 'factory_bot_rails'
   gem "selenium-webdriver"
+end
+
+group :test do
   gem "webmock"
+  gem "vcr"
 end
 
 group :development do
