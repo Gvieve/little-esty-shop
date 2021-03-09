@@ -8,6 +8,7 @@ class InvoiceItem < ApplicationRecord
 
   validates_presence_of :unit_price, :quantity
   validates :unit_price, :quantity, numericality: { greater_than_or_equal_to: 0 }
+
   enum status: [:pending, :packaged, :shipped]
 
   before_save :apply_discount
@@ -38,17 +39,15 @@ class InvoiceItem < ApplicationRecord
     .first
   end
 
-  def discount_percentage
-    best_discount ? best_discount.percent_discount : nil
-  end
-
   def apply_discount
     if best_discount.nil?
       self.discount_id = nil
       self.discount_price = nil
+      self.discount_percent = nil
     else
       self.discount_id = best_discount.id
-      self.discount_price = unit_price * ((100 - discount_percentage.to_f)/100)
+      self.discount_percent = best_discount.percent_discount
+      self.discount_price = unit_price * ((100 - discount_percent.to_f)/100)
     end
   end
 end
