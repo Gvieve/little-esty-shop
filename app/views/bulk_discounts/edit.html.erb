@@ -6,7 +6,6 @@
 <h3 class="alert alert-info"><center>Editing <%=@discount.name %> Discount </center> </h3>
 
 <%= render partial: "discount_form",
-    locals: { path: merchant_bulk_discount_path(@merchant, @discount),
-              method: :patch,
-              discount: @discount,
-              button_text: "Update Bulk Discount"} %>
+    locals: { merchant: @merchant,
+              bulk_discount: @discount,
+              method: :patch} %>

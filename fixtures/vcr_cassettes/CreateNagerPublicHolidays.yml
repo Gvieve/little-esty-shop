@@ -1,0 +1,123 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://date.nager.at/Api/v2/NextPublicHolidays/US
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 09 Mar 2021 22:53:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d166a265cd032d3f25de44a23cdfcaf541615330429; expires=Thu, 08-Apr-21
+        22:53:49 GMT; path=/; domain=.nager.at; HttpOnly; SameSite=Lax
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=2592000
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Request-Id:
+      - '08bacb623d0000feaa21a2a000000001'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"group":"cf-nel","endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=1BpEqpEThc1HT%2BXNtlzWGp36R8LhcM2%2BYjbx9Bs2WzxbiUkwLcpu7gexHph2fMp%2F%2B3OdfehyhkFhCz%2BL01HgHXOGw%2B2sTnKz2HXIfvBp"}],"max_age":604800}'
+      Nel:
+      - '{"max_age":604800,"report_to":"cf-nel"}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 62d7e1b06ef6feaa-IAH
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"date":"2021-05-31","localName":"Memorial Day","name":"Memorial Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-07-05","localName":"Independence
+        Day","name":"Independence Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-09-06","localName":"Labor
+        Day","name":"Labour Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-10-11","localName":"Columbus
+        Day","name":"Columbus Day","countryCode":"US","fixed":false,"global":false,"counties":["US-AL","US-AZ","US-CO","US-CT","US-DC","US-GA","US-ID","US-IL","US-IN","US-IA","US-KS","US-KY","US-LA","US-ME","US-MD","US-MA","US-MS","US-MO","US-MT","US-NE","US-NH","US-NJ","US-NM","US-NY","US-NC","US-OH","US-OK","US-PA","US-RI","US-SC","US-TN","US-UT","US-VA","US-WV"],"launchYear":null,"type":"Public"},{"date":"2021-11-11","localName":"Veterans
+        Day","name":"Veterans Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-11-25","localName":"Thanksgiving
+        Day","name":"Thanksgiving Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":1863,"type":"Public"},{"date":"2021-12-24","localName":"Christmas
+        Day","name":"Christmas Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-12-31","localName":"New
+        Year''s Day","name":"New Year''s Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2022-01-17","localName":"Martin
+        Luther King, Jr. Day","name":"Martin Luther King, Jr. Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2022-02-21","localName":"Presidents
+        Day","name":"Washington''s Birthday","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"}]'
+  recorded_at: Tue, 09 Mar 2021 22:53:50 GMT
+- request:
+    method: get
+    uri: https://date.nager.at/Api/v2/NextPublicHolidays/US
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 09 Mar 2021 22:53:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=df1c3ef7a2704a9c1d5927a6d157692261615330430; expires=Thu, 08-Apr-21
+        22:53:50 GMT; path=/; domain=.nager.at; HttpOnly; SameSite=Lax
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=2592000
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Request-Id:
+      - '08bacb65060000fed6fda69000000001'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"group":"cf-nel","endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=wCMd0z08yQLJy7jwqAR1%2BV6Q4F1eFLOpenu%2Fqb2ElTpQJF45ET8pd6NHPO4Ts3g6XUD375WkvfQpRSbxx5thEMEnbaxV0meRzZtoVGWa"}],"max_age":604800}'
+      Nel:
+      - '{"max_age":604800,"report_to":"cf-nel"}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 62d7e1b4dabcfed6-IAH
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"date":"2021-05-31","localName":"Memorial Day","name":"Memorial Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-07-05","localName":"Independence
+        Day","name":"Independence Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-09-06","localName":"Labor
+        Day","name":"Labour Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-10-11","localName":"Columbus
+        Day","name":"Columbus Day","countryCode":"US","fixed":false,"global":false,"counties":["US-AL","US-AZ","US-CO","US-CT","US-DC","US-GA","US-ID","US-IL","US-IN","US-IA","US-KS","US-KY","US-LA","US-ME","US-MD","US-MA","US-MS","US-MO","US-MT","US-NE","US-NH","US-NJ","US-NM","US-NY","US-NC","US-OH","US-OK","US-PA","US-RI","US-SC","US-TN","US-UT","US-VA","US-WV"],"launchYear":null,"type":"Public"},{"date":"2021-11-11","localName":"Veterans
+        Day","name":"Veterans Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-11-25","localName":"Thanksgiving
+        Day","name":"Thanksgiving Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":1863,"type":"Public"},{"date":"2021-12-24","localName":"Christmas
+        Day","name":"Christmas Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2021-12-31","localName":"New
+        Year''s Day","name":"New Year''s Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2022-01-17","localName":"Martin
+        Luther King, Jr. Day","name":"Martin Luther King, Jr. Day","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"},{"date":"2022-02-21","localName":"Presidents
+        Day","name":"Washington''s Birthday","countryCode":"US","fixed":false,"global":true,"counties":null,"launchYear":null,"type":"Public"}]'
+  recorded_at: Tue, 09 Mar 2021 22:53:50 GMT
+recorded_with: VCR 6.0.0

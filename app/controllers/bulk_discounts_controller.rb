@@ -19,7 +19,7 @@ class BulkDiscountsController < ApplicationController
     if @discount.save
       redirect_to merchant_bulk_discounts_path(@merchant)
     else
-      flash[:errors] = @discount.errors.full_messages
+      flash.now[:errors] = @discount.errors.full_messages
       render :new
     end
   end
@@ -32,7 +32,7 @@ class BulkDiscountsController < ApplicationController
       flash[:notice] = "#{@discount.name}'s successfully updated"
       render :show
     else
-      flash[:errors] = @discount.errors.full_messages
+      flash.now[:errors] = @discount.errors.full_messages
       render :edit
     end
   end
@@ -53,6 +53,6 @@ class BulkDiscountsController < ApplicationController
   end
 
   def discount_params
-    params.permit(:name, :item_threshold, :percent_discount)
+    params.require(:bulk_discount).permit(:name, :item_threshold, :percent_discount)
   end
 end
