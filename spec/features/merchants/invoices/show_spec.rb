@@ -44,8 +44,7 @@ RSpec.describe "As a merchant, when I visit my merchant's invoice show page(/mer
 
   describe "And if there are any discounts applied" do
     it "I see the total revenue, total discounts, and the adjusted grand total" do
-      merchant = Merchant.first
-      bd1 = merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
+      bd1 = @merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
       inv_item1 = InvoiceItem.create!(unit_price: 0.100e3, status: "packaged", quantity: 10, item_id: 3, invoice_id: 484)
       invoice484 = Invoice.find(484)
 
@@ -61,7 +60,6 @@ RSpec.describe "As a merchant, when I visit my merchant's invoice show page(/mer
 
   describe "Then I see all of my items on the invoice including:" do
     it "item name, quantity ordered, price it sold for, and invoice item status" do
-
       visit merchant_invoice_path(@merchant, @invoice)
 
       within ".invoice-items" do
@@ -73,35 +71,60 @@ RSpec.describe "As a merchant, when I visit my merchant's invoice show page(/mer
           expect(page).to have_content("$22,582.00")
         end
       end
+    end
+  end
 
-      describe 'if there are any applicable discounts' do
-        it "I see the discount amount which is a link to that discount's show page" do
+  describe 'if there are any applicable discounts' do
+    it "I see the discount amount and percent on each item" do
+      bd1 = @merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
+      invoice484 = Invoice.find(484)
+      invoice_item = InvoiceItem.where("invoice_id = 484", "quantity >= 10").first
 
-        end
+      visit merchant_invoice_path(@merchant, invoice484)
+
+      within ".invoice-item-#{invoice_item.id}" do
+        expect(page).to have_content(invoice_item.item.name)
+        expect(page).to have_content("$32,301.00")
+        expect(page).to have_content("$29,070.90")
+        expect(page).to have_content("10%")
       end
     end
+  end
 
-    it "and each invoice item status is a select field with the currrent status selected" do
+  it "and each discount amount is a link to that discount's show page" do
+    # merchant = Merchant.first
+    bd1 = @merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
+    invoice484 = Invoice.find(484)
+    invoice_item = InvoiceItem.where("invoice_id = 484", "quantity >= 10").first
+    invoice_item.update!(status: :pending)
+    invoice_item.reload
+
+    visit merchant_invoice_path(@merchant, invoice484)
+    # main = page.driver.browser
+
+    within ".invoice-item-#{invoice_item.id}" do
+      expect(page).to have_link("#{invoice_item.discount_percent}")
+      click_link "#{invoice_item.discount_percent}"
+
+      # popup = page.driver.browser.find_window('popup')
+      # page.driver.browser.switch_to.window(popup)
+      # expect(current_path).to eq(merchant_bulk_discount_path(merchant, invoice_item.discount_id))
+      # expect(page).to have_content("#{bd1.name}")
+    end
+  end
+
+  describe "When I click status select field, I can select a new Status" do
+    it "And I can click 'Update Item Status' abd see that the item's status is updated" do
       visit merchant_invoice_path(@merchant, @invoice)
 
+
       within ".invoice-item-#{@invoice_item.id}" do
-        expect(page.has_select?('invoice_item[status]', selected: "#{@invoice_item.status}"))
-      end
-    end
+        select 'shipped', from: 'invoice_item[status]'
+        expect(page).to have_button("Update Item Status")
 
-    describe "When I click status select field, I can select a new Status" do
-      it "And I can click 'Update Item Status' abd see that the item's status is updated" do
-        visit merchant_invoice_path(@merchant, @invoice)
-
-
-        within ".invoice-item-#{@invoice_item.id}" do
-          select 'shipped', from: 'invoice_item[status]'
-          expect(page).to have_button("Update Item Status")
-
-          click_button("Update Item Status")
-          expect(current_path).to eq("/merchant/#{@merchant.id}/invoices/#{@invoice.id}")
-          expect(page.has_select?('invoice_item[status]', selected: 'shipped'))
-        end
+        click_button("Update Item Status")
+        expect(current_path).to eq("/merchant/#{@merchant.id}/invoices/#{@invoice.id}")
+        expect(page.has_select?('invoice_item[status]', selected: 'shipped'))
       end
     end
   end

@@ -19,6 +19,8 @@
         <th class="white_glow">Item Name:</th>
         <th class="white_glow">Quantity:</th>
         <th class="white_glow">Unit Price:</th>
+        <th class="white_glow">Discounted Price:</th>
+        <th class="white_glow">Discount Amount:</th>
         <th class="white_glow">Status:</th>
       </tr>
     </thead>
@@ -29,6 +31,17 @@
         <td><%= invoice_item.item.name %></td>
         <td><%= invoice_item.quantity %></td>
         <td><%= number_to_currency(invoice_item.unit_price, precision: 2) %></td>
+        <td><%= number_to_currency(invoice_item.discount_price, precision: 2) %></td>
+        
+        <% if invoice_item.discount_percent %>
+          <td><%= link_to "#{number_to_percentage(invoice_item.discount_percent, precision: 0)}",
+          merchant_bulk_discount_path(@merchant, {id: invoice_item.discount_id}),
+          style: "color:white",
+          target: "popup",
+          onclick: "window.open('#{merchant_bulk_discount_path(@merchant, {id: invoice_item.discount_id})}','popup','width=600,height=600'); return false;"%></td>
+        <% else %>
+          <td><%= number_to_percentage(invoice_item.discount_percent, precision: 0) %></td>
+        <% end %>
         <td>
           <%= form_with url: "/invoice_items/#{invoice_item.id}", method: :patch, model: invoice_item,local: true, locals: {merchant_id: @merchant.id} do |f| %>
             <%= f.hidden_field :invoice_id, value: @invoice.id %>

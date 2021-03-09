@@ -11,7 +11,21 @@
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
-#
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
+
+RSpec.configure do |config|
+  config.before(:each) do
+    stub_request(:get, "https://api.github.com/repos/Gvieve/little-esty-shop").
+      with(headers: {
+    	  'Accept'=>'*/*',
+    	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+    	  'Authorization'=>"token fc7f2933ceb84b3cda1a3c36c6b6c409e90b9548",
+    	  'User-Agent'=>'Faraday v1.3.0'
+        }).
+      to_return(status: 200, body: "", headers: {})
+  end
+end
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
