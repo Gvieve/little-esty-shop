@@ -31,11 +31,13 @@ RSpec.describe 'Merchant Dashboard' do
       end
 
       it "I see a link to view all my discounts, when clicked I am taken to my bulk discounts index" do
-        visit merchant_dashboard_index_path(@merchant)
+        VCR.use_cassette("CreateNagerPublicHolidays") do
+          visit merchant_dashboard_index_path(@merchant)
 
-        expect(page).to have_button('My Discounts')
-        click_on 'My Discounts'
-        expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts")
+          expect(page).to have_button('My Discounts')
+          click_on 'My Discounts'
+          expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts")
+        end
       end
 
       it "I see my top 5 customer names with largest number of successful transactions" do
