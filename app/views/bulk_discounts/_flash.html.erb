@@ -1,5 +1,8 @@
 <% flash.each do |type, message| %>
-  <% message.each do |message| %>
-    <p class="red_glow"><%= message %></p>
+  <p class="red_glow"><%= message %></p>
+  <% if message.class == Array %>
+    <% message.each do |message| %>
+      <p class="red_glow"><%= message %></p>
+    <% end %>
   <% end %>
 <% end %>
