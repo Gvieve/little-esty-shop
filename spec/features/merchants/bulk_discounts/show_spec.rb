@@ -4,6 +4,7 @@ RSpec.describe 'As a merchant when I visit my bulk discount show page' do
   before :each do
     @merchant = Merchant.first
     @bd1 = @merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 10, percent_discount: 10)
+    @bd2 = @merchant.bulk_discounts.create!(name: "Discount 1", item_threshold: 20, percent_discount: 20)
   end
 
   it "Then I see the bulk discount's name, quantity threshold, and percentage discount" do
@@ -15,10 +16,16 @@ RSpec.describe 'As a merchant when I visit my bulk discount show page' do
   end
 
   it "I see a button to edit this discount, when clicked I am taken to an edit page" do
-    visit merchant_bulk_discount_path(@merchant, @bd1)
+    visit merchant_bulk_discount_path(@merchant, @bd2)
 
     expect(page).to have_button("Edit Bulk Discount")
     click_button "Edit Bulk Discount"
-    expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts/#{@bd1.id}/edit")
+    expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts/#{@bd2.id}/edit")
+  end
+
+  it "I do not see a button to edit this discount when there are pending invoice items" do
+    visit merchant_bulk_discount_path(@merchant, @bd1)
+
+    expect(page).to_not have_button("Edit Bulk Discount")
   end
 end
