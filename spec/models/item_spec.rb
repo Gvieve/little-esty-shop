@@ -66,13 +66,13 @@ RSpec.describe Item, type: :model do
         item4 = Item.find(6)
         item5 = Item.find(5)
 
-        expect(merchant.items.top_5_items.first).to eq(item3)
-        expect(merchant.items.top_5_items.second).to eq(item1)
-        expect(merchant.items.top_5_items.third).to eq(item5)
-        expect(merchant.items.top_5_items.fourth).to eq(item2)
-        expect(merchant.items.top_5_items.last).to eq(item4)
-        expect(merchant.items.top_5_items.first.total_revenue).to eq(0.2027889e7)
-        expect(merchant.items.top_5_items.last.total_revenue).to eq(0.780325e6)
+        expect(merchant.top_5_items.first).to eq(item3)
+        expect(merchant.top_5_items.second).to eq(item1)
+        expect(merchant.top_5_items.third).to eq(item5)
+        expect(merchant.top_5_items.fourth).to eq(item2)
+        expect(merchant.top_5_items.last).to eq(item4)
+        expect(merchant.top_5_items.first.total_revenue).to eq(0.2027889e7)
+        expect(merchant.top_5_items.last.total_revenue).to eq(0.780325e6)
       end
     end
   end
